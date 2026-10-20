@@ -1,0 +1,8 @@
+# Tool settings only; the add-on and the bench have no package build.
+[tool.ruff]
+# Anki 26.9 bundles Python 3.13; the bench runs on the same version.
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
