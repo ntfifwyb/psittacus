@@ -28,3 +28,12 @@ Piper's Chinese phonemizer (g2pW) needs PyTorch, which can't ship in Anki.
 
 ## 2026-10-20: MOSS-TTS-Nano runs only when the user sets it up (decided by Claude, pending review)
 Its runtime needs PyTorch, torchaudio and WeTextProcessing even on the ONNX path, and it isn't on PyPI, so the bench calls a checkout the user installs. Its core decode loop is numpy and onnxruntime only, and its built-in voices are pre-encoded, so a PyTorch-free port for the add-on looks possible.
+
+## 2026-10-20: Engines per language
+After listening to the bench, the user liked Kokoro and Piper most and found all three (Kokoro, Piper, Edge) good enough. Each language goes to the first engine in this order that has a voice for it, and falls back to the next one if that engine is missing or fails:
+
+1. **Kokoro**: English, Spanish, Portuguese (BR), French, Italian, Hindi, Japanese, Chinese
+2. **Piper**: German, Dutch, Polish, Russian, Turkish, Arabic, Korean, and any other language it has a voice for
+3. **Edge TTS** (online): every language neither local engine covers
+
+Gemini and MOSS-TTS-Nano weren't heard and stay out of the default order until they are.
