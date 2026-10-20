@@ -2,10 +2,11 @@
 
 All notable changes are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.2.0] - 2026-10-20
 
 ### Changed
 - Japanese and Chinese now speak with Kokoro, on your computer, through misaki, the phonemizer Kokoro was trained with. Japanese used to go to Piper and Chinese to Edge TTS (online); they're now the fallbacks. The add-on grows from 75 MB to about 200 MB, mostly Japanese and Chinese dictionaries.
+- The clip cache in `user_files/cache` stays under 100 MB (about 6,000 clips): when Anki starts, the clips played least recently are deleted. Audio saved into notes isn't affected, since it lives in the collection's media folder.
 
 ## [0.1.0] - 2026-10-20
 
@@ -17,4 +18,5 @@ First version, for Anki 26.9 on 64-bit Windows.
 - **Browse → Notes → Add Psittacus audio…** saves `[sound:]` MP3 clips into a field of the selected notes, so the audio plays in AnkiDroid and AnkiMobile. Notes whose audio field is already filled are skipped, and the change can be undone.
 - Voices per language live in `voices.json`; a `user_files/voices.json` overrides them.
 
+[0.2.0]: https://github.com/ntfifwyb/psittacus/releases/tag/v0.2.0
 [0.1.0]: https://github.com/ntfifwyb/psittacus/releases/tag/v0.1.0

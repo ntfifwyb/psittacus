@@ -5,6 +5,7 @@ No Anki imports, so it runs and is tested outside Anki. The engines live in engi
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import html
 import json
@@ -99,6 +100,8 @@ class Speaker:
                 continue
             path = self.cache / cache_name(name, voice, text, speed)
             if path.exists():
+                with contextlib.suppress(OSError):  # recently played clips are pruned last
+                    os.utime(path)
                 return path
             part = path.with_suffix(".part")
             try:
@@ -117,6 +120,30 @@ class Speaker:
         if not errors:
             raise NoVoice(f"no voice for {lang}")
         raise NoVoice("; ".join(errors))
+
+
+def prune_cache(cache: Path, max_bytes: int) -> int:
+    """Delete leftover .part files, then the least recently played clips until the cache
+    fits in max_bytes. Returns how many files were deleted.
+    """
+    if not cache.is_dir():
+        return 0
+    removed = 0
+    for part in cache.glob("*.part"):
+        part.unlink(missing_ok=True)
+        removed += 1
+    clips = [(p.stat(), p) for p in cache.glob("psittacus-*.mp3")]
+    total = sum(st.st_size for st, _ in clips)
+    for st, path in sorted(clips, key=lambda c: c[0].st_mtime):
+        if total <= max_bytes:
+            break
+        try:
+            path.unlink()
+        except OSError:  # in use by the player, say; try again next time
+            continue
+        total -= st.st_size
+        removed += 1
+    return removed
 
 
 def clean_text(field: str) -> str:

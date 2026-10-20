@@ -1,6 +1,7 @@
 """The add-on's routing, fallback and cache, with fake engines. No Anki, no models."""
 
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -135,6 +136,55 @@ class Speaking(unittest.TestCase):
             speaker.speak(" \n", "en")
         with self.assertRaisesRegex(core.NoVoice, "no voice for ko_KR"):
             speaker.speak("annyeong", "ko_KR")
+
+    def test_a_cache_hit_marks_the_clip_as_recently_played(self):
+        speaker = core.Speaker({"a": Fake()}, DATA, self.cache)
+        path = speaker.speak("Hi", "en")
+        os.utime(path, (1000, 1000))
+        speaker.speak("Hi", "en")
+        self.assertGreater(path.stat().st_mtime, 1000)
+
+
+class Pruning(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.cache = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def clip(self, name, size, played):
+        path = self.cache / f"psittacus-{name}.mp3"
+        path.write_bytes(b"x" * size)
+        os.utime(path, (played, played))
+        return path
+
+    def left(self):
+        return sorted(p.name for p in self.cache.iterdir())
+
+    def test_the_least_recently_played_clips_go_first(self):
+        self.clip("old", 40, 100)
+        self.clip("new", 40, 300)
+        self.clip("mid", 40, 200)
+        self.assertEqual(core.prune_cache(self.cache, 80), 1)
+        self.assertEqual(self.left(), ["psittacus-mid.mp3", "psittacus-new.mp3"])
+        self.assertEqual(core.prune_cache(self.cache, 79), 1)
+        self.assertEqual(self.left(), ["psittacus-new.mp3"])
+
+    def test_a_cache_under_the_cap_is_kept(self):
+        self.clip("a", 40, 100)
+        self.assertEqual(core.prune_cache(self.cache, 40), 0)
+        self.assertEqual(self.left(), ["psittacus-a.mp3"])
+
+    def test_leftover_parts_go_and_other_files_stay(self):
+        (self.cache / "psittacus-x.part").write_bytes(b"half")
+        (self.cache / "notes.txt").write_bytes(b"x" * 100)
+        self.clip("a", 40, 100)
+        self.assertEqual(core.prune_cache(self.cache, 0), 2)
+        self.assertEqual(self.left(), ["notes.txt"])
+
+    def test_a_missing_cache_is_nothing_to_prune(self):
+        self.assertEqual(core.prune_cache(self.cache / "none", 0), 0)
 
 
 class Filling(unittest.TestCase):

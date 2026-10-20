@@ -31,6 +31,8 @@ from . import core  # noqa: E402
 from .engines import ENGINES  # noqa: E402
 
 VOICE = "Psittacus"
+# About 6,000 clips. {{tts}} clips are only a cache, and saved audio lives in the collection.
+CACHE_BYTES = 100 * 1024 * 1024
 _speaker: core.Speaker | None = None
 
 
@@ -44,6 +46,7 @@ def speaker() -> core.Speaker:
         data = core.load_voices(HERE / "voices.json", USER / "voices.json")
         engines = {name: cls(USER / "models", notify) for name, cls in ENGINES.items()}
         _speaker = core.Speaker(engines, data, USER / "cache")
+        core.prune_cache(USER / "cache", CACHE_BYTES)
     return _speaker
 
 
