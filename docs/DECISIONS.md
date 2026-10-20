@@ -55,3 +55,6 @@ Anki 26.9.3 on Windows is an embedded Python 3.13 without numpy or onnxruntime, 
 
 ## 2026-10-20: How Psittacus ranks against other voices (decided by Claude, pending review)
 Psittacus speaks every `{{tts}}` tag in a language it covers (rank -10, above Anki's -100 fallback for system voices), but a tag that names another voice that exists keeps it (Psittacus drops to -60). `voices=Psittacus` asks for it explicitly.
+
+## 2026-10-20: The add-on is a standalone tool for cards made by hand
+Decks the user builds with Claude in `ntfifwyb/anki-setup` ship their audio, made at build time with Psittacus's code (see anki-setup's `FLASHCARD_GUIDE.md`), so the user may not need the add-on. It's still worth building, for anyone who writes cards by hand or uses decks without audio and wants a more natural voice than Anki's system TTS. Psittacus therefore stands on its own: it must make sense to someone who has never heard of anki-setup, and stays usable as a library for decks that make their audio at build time. v0.2 (Kokoro's Japanese and Chinese) goes ahead. Chosen by the user.
