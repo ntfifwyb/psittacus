@@ -6,3 +6,4 @@ dist/
 .env
 .venv/
 bench-out/
+uv.lock
