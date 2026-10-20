@@ -64,3 +64,6 @@ v0.2 bundles misaki with pyopenjtalk-plus (Windows wheels, with OpenJTalk's dict
 
 ## 2026-10-20: Kokoro's Chinese reads below Japanese in the Whisper check (decided by Claude, pending review)
 Kokoro's Chinese scores CER 0.36 on 我昨天把雨伞忘在车站了 (Whisper hears 白雨散望 for 把雨伞忘), the same as in the bench the user listened to; Japanese and the date sentence score 0. Chinese still goes to Kokoro first, as the engine order says, with Edge TTS as the fallback. If it sounds wrong to the user, Edge can go back to first for Chinese.
+
+## 2026-10-20: The clip cache is capped at 100 MB (decided by Claude, pending review)
+`user_files/cache` holds every `{{tts}}` clip ever made, so it would grow without end. When the add-on's speaker starts (once per Anki session), the clips played least recently are deleted until the cache fits in 100 MB, about 6,000 clips. A cache hit refreshes the clip's date. The cap is a constant, not a setting: `config.json` holds the fill dialog's last choice and is rewritten on each fill. `core.Speaker` itself doesn't prune, so decks that build their audio with it keep their cache.
