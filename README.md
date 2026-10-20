@@ -2,6 +2,8 @@
 
 An Anki add-on that replaces Anki's text-to-speech with modern neural voices. *Psittacus* is Latin for parrot.
 
+It's for cards you write yourself and for decks that come without audio: select the notes, and Psittacus speaks them with a voice much closer to a person than your system's text-to-speech.
+
 - **Plays `{{tts}}` tags.** Existing templates such as `{{tts en_US:Front}}` speak with a neural voice on desktop, with no change to your cards. Audio is generated on first play and cached.
 - **Saves audio into notes.** Writes `[sound:...]` MP3 files into a field, so the audio syncs to AnkiDroid and AnkiMobile, which don't run add-ons.
 - **Picks the best voice per language.** Local models (free, offline, no limits) are used where they're good, and free cloud voices cover the rest. The model list is data, so new models can be added without rewriting the add-on.
@@ -35,6 +37,8 @@ Each language goes to the first engine with a voice for it. If that engine fails
 - `.local-ci` runs the checks: ruff format and lint, and the unit tests.
 - `uv run --no-project scripts/build.py` builds `dist/psittacus-<version>-windows.ankiaddon`, with the engines' packages resolved for Anki's Python 3.13 on Windows (it runs from WSL too).
 - [`bench/`](bench/README.md) is the listening test that chose the engines: it renders the same sentences in 15 languages with each candidate, times them, and checks with Whisper that each clip says the right words.
+
+Psittacus's engines also work outside Anki, for decks that make their audio when they're built (as [ntfifwyb/anki-setup](https://github.com/ntfifwyb/anki-setup) does): `addon/core.py` and `addon/engines.py` don't import Anki, and `core.Speaker` names each clip as the add-on does, so a deck's clips and the add-on's never duplicate.
 
 Decisions are logged in [docs/DECISIONS.md](docs/DECISIONS.md).
 
