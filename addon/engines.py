@@ -7,8 +7,10 @@ Unavailable, and the rest of the add-on (and its tests) loads without them.
 from __future__ import annotations
 
 import asyncio
+import logging
 import os
 import urllib.request
+import warnings
 from collections.abc import Callable
 from pathlib import Path
 
@@ -48,6 +50,7 @@ class Kokoro:
         self.dir = models / "kokoro"
         self.notify = notify
         self.tts = None
+        self.g2p = {}
 
     def load(self):
         for name, size in self.files.items():
@@ -63,10 +66,46 @@ class Kokoro:
         except Exception as e:
             raise Unavailable(f"couldn't load Kokoro: {e}") from e
 
+    def phonemizer(self, kind: str):
+        # A failure here is a plain error, not Unavailable: Kokoro's other languages still work.
+        if kind not in self.g2p:
+            if kind == "misaki-ja":
+                from misaki import ja
+
+                self.g2p[kind] = ja.JAG2P(version="pyopenjtalk")
+            elif kind == "misaki-zh":
+                # Anki reports anything written to stderr as an add-on error, and jieba
+                # logs its dictionary loading there and has invalid escapes in its regexes.
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", SyntaxWarning)
+                    import jieba
+                    from misaki import zh
+                jieba.setLogLevel(logging.WARNING)
+                self.g2p[kind] = zh.ZHG2P()
+            else:
+                raise ValueError(f"unknown g2p {kind!r}")
+        return self.g2p[kind]
+
+    def phonemes(self, text: str, kind: str) -> str:
+        result, tokens = self.phonemizer(kind)(text)
+        if tokens is None:
+            return result
+        # JAG2P's string carries a pitch track after the phonemes; rebuild from the tokens.
+        return "".join((t.phonemes or "") + t.whitespace for t in tokens)
+
     def synth(self, text, voice, speed, out):
         if self.tts is None:
             self.load()
-        audio, rate = self.tts.create(text, voice=voice["voice"], lang=voice["lang"], speed=speed)
+        # espeak reads kanji as "Chinese letter", so Japanese and Chinese go through misaki,
+        # the phonemizer Kokoro was trained with.
+        kind = voice.get("g2p")
+        if kind:
+            text = self.phonemes(text, kind)
+            if not text.strip():
+                raise RuntimeError("no phonemes")
+        audio, rate = self.tts.create(
+            text, voice=voice["voice"], lang=voice["lang"], speed=speed, is_phonemes=bool(kind)
+        )
         write_mp3(out, audio, rate)
 
 

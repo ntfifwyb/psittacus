@@ -8,7 +8,9 @@
       "pt-BR": {"voice": "pf_dora", "lang": "pt-br"},
       "fr": {"voice": "ff_siwis", "lang": "fr-fr"},
       "it": {"voice": "if_sara", "lang": "it"},
-      "hi": {"voice": "hf_alpha", "lang": "hi"}
+      "hi": {"voice": "hf_alpha", "lang": "hi"},
+      "ja": {"voice": "jf_alpha", "lang": "ja", "g2p": "misaki-ja"},
+      "zh": {"voice": "zf_xiaoxiao", "lang": "cmn", "g2p": "misaki-zh"}
     },
     "piper": {
       "de": {"voice": "de_DE-thorsten-high"},

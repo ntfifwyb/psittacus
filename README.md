@@ -10,7 +10,7 @@ It's for cards you write yourself and for decks that come without audio: select 
 
 ## Install
 
-Version 0.1 runs on Anki 26.9 for 64-bit Windows. Download `psittacus-<version>-windows.ankiaddon` from the [latest release](https://github.com/ntfifwyb/psittacus/releases/latest) and double-click it, or use **Tools → Add-ons → Install from file…**, then restart Anki.
+Psittacus runs on Anki 26.9 for 64-bit Windows. Download `psittacus-<version>-windows.ankiaddon` from the [latest release](https://github.com/ntfifwyb/psittacus/releases/latest) and double-click it, or use **Tools → Add-ons → Install from file…**, then restart Anki. The file is about 200 MB, most of it Japanese and Chinese dictionaries, so these languages work offline.
 
 The first clip in a language downloads that engine's model once, into the add-on's `user_files` folder: 340 MB for Kokoro, 60–110 MB per Piper voice. Edge TTS needs no download but needs the internet every time it speaks.
 
@@ -26,8 +26,8 @@ Then put the audio field in the card template, for example `{{ExampleAudio}}`, a
 
 | Engine | Runs | Languages |
 |---|---|---|
-| Kokoro 82M | on your computer | English (US, UK), Spanish, Portuguese (BR), French, Italian, Hindi |
-| Piper | on your computer | German, Dutch, Polish, Russian, Turkish, Arabic, Japanese, Korean |
+| Kokoro 82M | on your computer | English (US, UK), Spanish, Portuguese (BR), French, Italian, Hindi, Japanese, Chinese |
+| Piper | on your computer | German, Dutch, Polish, Russian, Turkish, Arabic, Korean |
 | Edge TTS | Microsoft's servers, unofficial | Chinese, Portuguese (PT), and the above if a local engine fails |
 
 Each language goes to the first engine with a voice for it. If that engine fails, the next one speaks; an engine that can't run at all (a failed download, say) is skipped until Anki restarts. The order and voices are in `voices.json`. To change them, copy it to `user_files/voices.json` and edit the copy: its entries override the shipped ones and survive updates.
