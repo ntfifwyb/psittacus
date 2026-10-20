@@ -1,9 +1,13 @@
+addict==2.4.0
+    # via misaki
 aiohappyeyeballs==2.7.1
     # via aiohttp
 aiohttp==3.14.5
     # via edge-tts
 aiosignal==1.4.0
     # via aiohttp
+annotated-types==0.8.0
+    # via pydantic
 attrs==26.1.0
     # via
     #   aiohttp
@@ -14,6 +18,8 @@ cffi==2.1.1
     # via soundfile
 cloudpickle==3.1.2
     # via joblib
+cn2an==0.5.24
+    # via -r requirements-addon.txt
 dlinfo==2.0.0
     # via phonemizer
 edge-tts==7.3.1
@@ -28,9 +34,13 @@ frozenlist==1.8.0
     #   aiosignal
 idna==3.20
     # via yarl
+jieba==0.42.1
+    # via -r requirements-addon.txt
 joblib==1.6.0
     # via phonemizer
 kokoro-onnx==0.6.1
+    # via -r requirements-addon.txt
+misaki==0.9.4
     # via -r requirements-addon.txt
 multidict==7.1.0
     # via
@@ -40,11 +50,14 @@ numpy==2.5.4
     # via
     #   kokoro-onnx
     #   onnxruntime
+    #   pyopenjtalk-plus
     #   soundfile
 onnxruntime==1.31.0
     # via
     #   kokoro-onnx
     #   piper-tts
+ordered-set==4.1.0
+    # via -r requirements-addon.txt
 packaging==26.3
     # via onnxruntime
 pathvalidate==3.3.1
@@ -53,6 +66,8 @@ phonemizer==3.4.0
     # via kokoro-onnx
 piper-tts==1.8.0
     # via -r requirements-addon.txt
+proces==0.1.7
+    # via cn2an
 propcache==0.5.4
     # via
     #   aiohttp
@@ -61,13 +76,35 @@ protobuf==7.36.2
     # via onnxruntime
 pycparser==3.11
     # via cffi
+pydantic==2.14.1
+    # via pyopenjtalk-plus
+pydantic-core==2.50.1
+    # via pydantic
+pyopenjtalk-plus==0.4.1.post9
+    # via -r requirements-addon.txt
+pypinyin==0.55.0
+    # via -r requirements-addon.txt
+regex==2026.9.29
+    # via misaki
 soundfile==0.13.1
     # via -r requirements-addon.txt
+sudachidict-core==20261015
+    # via pyopenjtalk-plus
+sudachipy==0.7.0
+    # via
+    #   pyopenjtalk-plus
+    #   sudachidict-core
 tabulate==0.10.0
     # via edge-tts
 typing-extensions==4.16.0
     # via
     #   edge-tts
     #   phonemizer
+    #   pydantic
+    #   pydantic-core
+    #   pyopenjtalk-plus
+    #   typing-inspection
+typing-inspection==0.4.4
+    # via pydantic
 yarl==1.25.1
     # via aiohttp

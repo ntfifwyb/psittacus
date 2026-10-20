@@ -58,3 +58,9 @@ Psittacus speaks every `{{tts}}` tag in a language it covers (rank -10, above An
 
 ## 2026-10-20: The add-on is a standalone tool for cards made by hand
 Decks the user builds with Claude in `ntfifwyb/anki-setup` ship their audio, made at build time with Psittacus's code (see anki-setup's `FLASHCARD_GUIDE.md`), so the user may not need the add-on. It's still worth building, for anyone who writes cards by hand or uses decks without audio and wants a more natural voice than Anki's system TTS. Psittacus therefore stands on its own: it must make sense to someone who has never heard of anki-setup, and stays usable as a library for decks that make their audio at build time. v0.2 (Kokoro's Japanese and Chinese) goes ahead. Chosen by the user.
+
+## 2026-10-20: Kokoro's Japanese and Chinese ship with all their dictionaries
+v0.2 bundles misaki with pyopenjtalk-plus (Windows wheels, with OpenJTalk's dictionary) and jieba, without misaki's `[ja]` extra, which pulls in unidic and a second pyopenjtalk. The `.ankiaddon` grows from 75 MB to 205 MB, 76 MB of it Sudachi's dictionary, which pyopenjtalk-plus uses to correct homograph readings (方 as かた or ほう). Bundling everything keeps Japanese as heard in the bench and offline from the first clip; skipping Sudachi would have saved 76 MB. Chosen by the user.
+
+## 2026-10-20: Kokoro's Chinese reads below Japanese in the Whisper check (decided by Claude, pending review)
+Kokoro's Chinese scores CER 0.36 on 我昨天把雨伞忘在车站了 (Whisper hears 白雨散望 for 把雨伞忘), the same as in the bench the user listened to; Japanese and the date sentence score 0. Chinese still goes to Kokoro first, as the engine order says, with Edge TTS as the fallback. If it sounds wrong to the user, Edge can go back to first for Chinese.

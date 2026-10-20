@@ -59,7 +59,10 @@ class Routing(unittest.TestCase):
         self.assertEqual(
             [e for e, _ in core.candidates("en_US", data)], ["kokoro", "piper", "edge"]
         )
-        self.assertEqual([e for e, _ in core.candidates("zh_CN", data)], ["edge"])
+        self.assertEqual(
+            [e for e, _ in core.candidates("ja_JP", data)], ["kokoro", "piper", "edge"]
+        )
+        self.assertEqual([e for e, _ in core.candidates("zh_CN", data)], ["kokoro", "edge"])
 
     def test_a_user_file_overrides_single_voices(self):
         with tempfile.TemporaryDirectory() as d:
