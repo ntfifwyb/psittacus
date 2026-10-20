@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# The checks every PR must pass, run on this machine by `local-ci` (claude-toolkit)
+# in place of GitHub Actions. Run it directly to check without posting a status.
+# ruff runs through uv, pinned so results don't drift between runs.
+set -euo pipefail
+cd "$(dirname "$0")"
+ruff="uvx ruff@0.14.0"
+
+step() { echo; echo "== $*"; }
+
+step "format";  $ruff format --check .
+step "lint";    $ruff check .
+if compgen -G "tests/test_*.py" >/dev/null; then
+  step "test";  uv run --no-project -p 3.13 python -m unittest discover -s tests
+fi
