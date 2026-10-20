@@ -40,3 +40,12 @@ Gemini and MOSS-TTS-Nano weren't heard and stay out of the default order until t
 
 ## 2026-10-20: First target deck is English Expressions, with audio saved into notes
 The user reviews on the phone too, so the English Expressions deck (`ntfifwyb/anki-setup`, `decks/english-expressions/build.py`) gets `ExpressionAudio` and `ExampleAudio` fields, and its templates play `[sound:]` files instead of `{{tts}}` tags. The Produce front stays silent, since audio would give the answer away. The Produce back plays the whole example sentence. The Recognise front plays the expression, and its back plays the example. Psittacus's save-to-note mode therefore maps a source field to a target audio field (Expression → ExpressionAudio, Example → ExampleAudio), strips HTML, and skips notes whose target field is already filled.
+
+## 2026-10-20: Kokoro's full-precision model
+The add-on downloads Kokoro's fp32 model (310 MB, plus 27 MB of voices) on first use: the one heard in the bench. The int8 model (88 MB) wasn't heard. Chosen by the user.
+
+## 2026-10-20: Kokoro's Japanese and Chinese come later
+v0.1 doesn't bundle misaki and pyopenjtalk, so Japanese goes to Piper and Chinese to Edge TTS until a later version adds them. The English deck doesn't need them, and the add-on stays smaller. Chosen by the user.
+
+## 2026-10-20: Clips are MP3 (decided by Claude, pending review)
+Every engine's output is saved as MP3 (soundfile encodes it; Edge already sends MP3): small enough to sync, and played by AnkiDroid and AnkiMobile.

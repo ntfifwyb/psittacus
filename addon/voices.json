@@ -1,0 +1,49 @@
+{
+  "order": ["kokoro", "piper", "edge"],
+  "voices": {
+    "kokoro": {
+      "en": {"voice": "af_heart", "lang": "en-us"},
+      "en-GB": {"voice": "bf_emma", "lang": "en-gb"},
+      "es": {"voice": "ef_dora", "lang": "es"},
+      "pt-BR": {"voice": "pf_dora", "lang": "pt-br"},
+      "fr": {"voice": "ff_siwis", "lang": "fr-fr"},
+      "it": {"voice": "if_sara", "lang": "it"},
+      "hi": {"voice": "hf_alpha", "lang": "hi"}
+    },
+    "piper": {
+      "de": {"voice": "de_DE-thorsten-high"},
+      "nl": {"voice": "nl_NL-pim-medium"},
+      "pl": {"voice": "pl_PL-gosia-medium"},
+      "ru": {"voice": "ru_RU-irina-medium"},
+      "tr": {"voice": "tr_TR-dfki-medium"},
+      "ar": {"voice": "ar_JO-kareem-medium"},
+      "ja": {"voice": "ja_JP-hi_fi_captain-medium"},
+      "ko": {"voice": "ko_KR-kss-medium"},
+      "en": {"voice": "en_US-lessac-high"},
+      "es": {"voice": "es_MX-claude-high"},
+      "pt-BR": {"voice": "pt_BR-faber-medium"},
+      "fr": {"voice": "fr_FR-siwis-medium"},
+      "it": {"voice": "it_IT-paola-medium"},
+      "hi": {"voice": "hi_IN-priyamvada-medium"}
+    },
+    "edge": {
+      "en": {"voice": "en-US-AvaNeural"},
+      "en-GB": {"voice": "en-GB-SoniaNeural"},
+      "es": {"voice": "es-MX-DaliaNeural"},
+      "pt-BR": {"voice": "pt-BR-FranciscaNeural"},
+      "pt-PT": {"voice": "pt-PT-RaquelNeural"},
+      "fr": {"voice": "fr-FR-DeniseNeural"},
+      "de": {"voice": "de-DE-KatjaNeural"},
+      "it": {"voice": "it-IT-ElsaNeural"},
+      "nl": {"voice": "nl-NL-ColetteNeural"},
+      "pl": {"voice": "pl-PL-ZofiaNeural"},
+      "ru": {"voice": "ru-RU-SvetlanaNeural"},
+      "tr": {"voice": "tr-TR-EmelNeural"},
+      "ar": {"voice": "ar-SA-ZariyahNeural"},
+      "hi": {"voice": "hi-IN-SwaraNeural"},
+      "ja": {"voice": "ja-JP-NanamiNeural"},
+      "zh": {"voice": "zh-CN-XiaoxiaoNeural"},
+      "ko": {"voice": "ko-KR-SunHiNeural"}
+    }
+  }
+}
