@@ -6,8 +6,10 @@ No Anki imports, so it runs and is tested outside Anki. The engines live in engi
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 import os
+import re
 import threading
 from pathlib import Path
 from typing import Protocol
@@ -115,3 +117,37 @@ class Speaker:
         if not errors:
             raise NoVoice(f"no voice for {lang}")
         raise NoVoice("; ".join(errors))
+
+
+def clean_text(field: str) -> str:
+    """The words in a field: no HTML, [sound:] tags or entities, whitespace collapsed."""
+    text = re.sub(r"\[sound:[^\]]*\]", " ", field)
+    text = re.sub(r"<(br|div|p|li)\b[^>]*>", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"<[^>]*>", "", text)
+    return " ".join(html.unescape(text).split())
+
+
+def fill_jobs(notes: list[tuple[int, str | None, str | None]]) -> list[tuple[int, str]]:
+    """(note id, text) to speak, from (note id, source field, target field) per note.
+
+    A note is skipped when it lacks either field (None), its target already holds
+    something, or its source has no words.
+    """
+    jobs = []
+    for nid, source, target in notes:
+        if source is None or target is None or target.strip():
+            continue
+        if text := clean_text(source):
+            jobs.append((nid, text))
+    return jobs
+
+
+def fill_report(added: int, skipped: int, errors: list[str], stopped: bool) -> str:
+    parts = [f"Added audio to {added} note{'' if added == 1 else 's'}."]
+    if skipped:
+        parts.append(f"Skipped {skipped}: audio already there, or no text.")
+    if errors:
+        parts.append(f"{len(errors)} failed, first: {errors[0]}")
+    if stopped:
+        parts.append("Stopped early; run it again to continue.")
+    return " ".join(parts)

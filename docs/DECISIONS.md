@@ -49,3 +49,9 @@ v0.1 doesn't bundle misaki and pyopenjtalk, so Japanese goes to Piper and Chines
 
 ## 2026-10-20: Clips are MP3 (decided by Claude, pending review)
 Every engine's output is saved as MP3 (soundfile encodes it; Edge already sends MP3): small enough to sync, and played by AnkiDroid and AnkiMobile.
+
+## 2026-10-20: Packaging for Windows (decided by Claude, pending review)
+Anki 26.9.3 on Windows is an embedded Python 3.13 without numpy or onnxruntime, so the `.ankiaddon` bundles the engines' packages in `vendor/`, resolved for 64-bit Windows by `scripts/build.py` (75 MB). `vendor/` is appended to `sys.path`, so Anki's own copies of shared packages win. Models download on first use into `user_files/`, which Anki keeps across add-on updates. Other platforms need their own build, later.
+
+## 2026-10-20: How Psittacus ranks against other voices (decided by Claude, pending review)
+Psittacus speaks every `{{tts}}` tag in a language it covers (rank -10, above Anki's -100 fallback for system voices), but a tag that names another voice that exists keeps it (Psittacus drops to -60). `voices=Psittacus` asks for it explicitly.
