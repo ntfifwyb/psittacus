@@ -37,3 +37,6 @@ After listening to the bench, the user liked Kokoro and Piper most and found all
 3. **Edge TTS** (online): every language neither local engine covers
 
 Gemini and MOSS-TTS-Nano weren't heard and stay out of the default order until they are.
+
+## 2026-10-20: First target deck is English Expressions, with audio saved into notes
+The user reviews on the phone too, so the English Expressions deck (`ntfifwyb/anki-setup`, `decks/english-expressions/build.py`) gets `ExpressionAudio` and `ExampleAudio` fields, and its templates play `[sound:]` files instead of `{{tts}}` tags. The Produce front stays silent, since audio would give the answer away. The Produce back plays the whole example sentence. The Recognise front plays the expression, and its back plays the example. Psittacus's save-to-note mode therefore maps a source field to a target audio field (Expression → ExpressionAudio, Example → ExampleAudio), strips HTML, and skips notes whose target field is already filled.
