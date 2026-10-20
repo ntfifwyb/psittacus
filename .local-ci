@@ -11,5 +11,5 @@ step() { echo; echo "== $*"; }
 step "format";  $ruff format --check .
 step "lint";    $ruff check .
 if compgen -G "tests/test_*.py" >/dev/null; then
-  step "test";  uv run --no-project -p 3.13 python -m unittest discover -s tests
+  step "test";  uv run --no-project -p 3.13 --with numpy==2.3.4 python -m unittest discover -s tests
 fi

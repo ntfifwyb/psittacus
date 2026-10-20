@@ -8,6 +8,6 @@ Planned behavior:
 - **Saves audio into notes.** Writes `[sound:...]` files into a field, so the audio syncs to AnkiDroid and AnkiMobile, which don't run add-ons.
 - **Picks the best voice per language.** Local models (free, offline, no limits) are used where they're good, and free cloud voices cover the rest. The model list is data, so new models can be added without rewriting the add-on.
 
-Status: choosing models. The listening test in `bench/` renders the same flashcard sentences with each candidate engine so they can be compared by ear before the add-on is built.
+Status: choosing models. The listening test in [`bench/`](bench/README.md) renders the same flashcard sentences in 15 languages with each candidate engine, times them, and checks with Whisper that each clip says the right words, so engines can be compared by ear before the add-on is built.
 
 Decisions are logged in [docs/DECISIONS.md](docs/DECISIONS.md).

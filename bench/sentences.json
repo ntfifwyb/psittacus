@@ -1,0 +1,17 @@
+{
+  "en": {"name": "English", "lines": ["squirrel", "I left my umbrella at the station yesterday."]},
+  "es": {"name": "Spanish", "lines": ["ferrocarril", "Ayer dejé el paraguas en la estación."]},
+  "pt-BR": {"name": "Portuguese (Brazil)", "lines": ["pãozinho", "Ontem eu esqueci o guarda-chuva na estação."]},
+  "fr": {"name": "French", "lines": ["écureuil", "J'ai oublié mon parapluie à la gare hier."]},
+  "de": {"name": "German", "lines": ["Eichhörnchen", "Ich habe gestern meinen Regenschirm am Bahnhof vergessen."]},
+  "it": {"name": "Italian", "lines": ["scoiattolo", "Ieri ho dimenticato l'ombrello in stazione."]},
+  "nl": {"name": "Dutch", "lines": ["eekhoorn", "Gisteren heb ik mijn paraplu op het station laten liggen."]},
+  "pl": {"name": "Polish", "lines": ["wiewiórka", "Wczoraj zostawiłem parasol na dworcu."]},
+  "ru": {"name": "Russian", "lines": ["белка", "Вчера я забыл зонт на вокзале."]},
+  "tr": {"name": "Turkish", "lines": ["sincap", "Dün şemsiyemi istasyonda unuttum."]},
+  "ar": {"name": "Arabic", "lines": ["سنجاب", "نسيت مظلتي في المحطة أمس."]},
+  "hi": {"name": "Hindi", "lines": ["गिलहरी", "मैं कल अपना छाता स्टेशन पर भूल गया।"]},
+  "ja": {"name": "Japanese", "lines": ["昨日", "昨日、駅に傘を忘れました。"]},
+  "zh": {"name": "Chinese (Mandarin)", "lines": ["松鼠", "我昨天把雨伞忘在车站了。"]},
+  "ko": {"name": "Korean", "lines": ["다람쥐", "어제 역에 우산을 두고 왔어요."]}
+}

@@ -1,0 +1,12 @@
+:root { color-scheme: light dark; --bg: #fff; --fg: #1a1a1a; --dim: #6b6b6b; --line: #e3e3e3; }
+@media (prefers-color-scheme: dark) { :root { --bg: #161616; --fg: #ececec; --dim: #9a9a9a; --line: #2e2e2e; } }
+body { background: var(--bg); color: var(--fg); font: 14px/1.4 system-ui, sans-serif; margin: 24px; }
+table { border-collapse: collapse; }
+.wrap { overflow-x: auto; }
+th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { position: sticky; top: 0; background: var(--bg); }
+audio { width: 190px; height: 32px; display: block; }
+.m, .note { color: var(--dim); font-size: 12px; }
+.lang { font-weight: 600; }
+.bad { color: #c0392b; font-weight: 600; }
+.err { color: #c0392b; font-size: 12px; max-width: 190px; overflow-wrap: anywhere; }
