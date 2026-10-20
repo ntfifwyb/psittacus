@@ -134,5 +134,33 @@ class Speaking(unittest.TestCase):
             speaker.speak("annyeong", "ko_KR")
 
 
+class Filling(unittest.TestCase):
+    def test_clean_text(self):
+        self.assertEqual(
+            core.clean_text("I'd <b>rather</b> not.<br>Really&nbsp;&amp; truly [sound:x.mp3]"),
+            "I'd rather not. Really & truly",
+        )
+        self.assertEqual(core.clean_text("<div>one</div><div>two</div>"), "one two")
+
+    def test_fill_jobs_skip_filled_missing_and_empty(self):
+        notes = [
+            (1, "<b>Hi</b> there", ""),
+            (2, "Hello", "[sound:old.mp3]"),
+            (3, "Hello", None),
+            (4, None, ""),
+            (5, "<br> ", " "),
+            (6, "Bye", " "),
+        ]
+        self.assertEqual(core.fill_jobs(notes), [(1, "Hi there"), (6, "Bye")])
+
+    def test_fill_report(self):
+        self.assertEqual(core.fill_report(1, 0, [], False), "Added audio to 1 note.")
+        self.assertEqual(
+            core.fill_report(3, 2, ["edge: offline", "edge: offline"], True),
+            "Added audio to 3 notes. Skipped 2: audio already there, or no text. "
+            "2 failed, first: edge: offline Stopped early; run it again to continue.",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

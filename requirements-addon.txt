@@ -1,0 +1,8 @@
+# Packages bundled into the .ankiaddon by scripts/build.py, for Anki's Python 3.13.
+# After editing, pin the full set for Windows (scripts/build.py installs from the lock):
+#   uv pip compile requirements-addon.txt --python-platform x86_64-pc-windows-msvc \
+#     --python-version 3.13 --no-header -o requirements-addon.lock
+kokoro-onnx==0.6.1
+piper-tts==1.8.0
+edge-tts==7.3.1
+soundfile==0.13.1

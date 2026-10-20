@@ -7,3 +7,4 @@ dist/
 .venv/
 bench-out/
 uv.lock
+build/

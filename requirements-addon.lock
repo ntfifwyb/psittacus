@@ -1,0 +1,73 @@
+aiohappyeyeballs==2.7.1
+    # via aiohttp
+aiohttp==3.14.5
+    # via edge-tts
+aiosignal==1.4.0
+    # via aiohttp
+attrs==26.1.0
+    # via
+    #   aiohttp
+    #   phonemizer
+certifi==2026.10.19
+    # via edge-tts
+cffi==2.1.1
+    # via soundfile
+cloudpickle==3.1.2
+    # via joblib
+dlinfo==2.0.0
+    # via phonemizer
+edge-tts==7.3.1
+    # via -r requirements-addon.txt
+espeakng-loader==0.2.4
+    # via kokoro-onnx
+flatbuffers==25.12.19
+    # via onnxruntime
+frozenlist==1.8.0
+    # via
+    #   aiohttp
+    #   aiosignal
+idna==3.20
+    # via yarl
+joblib==1.6.0
+    # via phonemizer
+kokoro-onnx==0.6.1
+    # via -r requirements-addon.txt
+multidict==7.1.0
+    # via
+    #   aiohttp
+    #   yarl
+numpy==2.5.4
+    # via
+    #   kokoro-onnx
+    #   onnxruntime
+    #   soundfile
+onnxruntime==1.31.0
+    # via
+    #   kokoro-onnx
+    #   piper-tts
+packaging==26.3
+    # via onnxruntime
+pathvalidate==3.3.1
+    # via piper-tts
+phonemizer==3.4.0
+    # via kokoro-onnx
+piper-tts==1.8.0
+    # via -r requirements-addon.txt
+propcache==0.5.4
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==7.36.2
+    # via onnxruntime
+pycparser==3.11
+    # via cffi
+soundfile==0.13.1
+    # via -r requirements-addon.txt
+tabulate==0.10.0
+    # via edge-tts
+typing-extensions==4.16.0
+    # via
+    #   edge-tts
+    #   phonemizer
+yarl==1.25.1
+    # via aiohttp
